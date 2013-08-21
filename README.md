@@ -1,6 +1,6 @@
 # Xmlenc
 
-TODO: Write a gem description
+This gem is a (partial) implementation of the XMLEncryption specification (http://www.w3.org/TR/xmlenc-core/)
 
 ## Installation
 
@@ -18,7 +18,15 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Decrypt a document
+
+```ruby
+  key_pem = File.read('path/to/key.pem')
+  xml = File.read('path/to/file.xml')
+
+  private_key = OpenSSL::PKey::RSA.new(key_pem)
+  decrypted_document = Xmlenc::EncryptedDocument.decrypt(private_key)
+```
 
 ## Contributing
 
