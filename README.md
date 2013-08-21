@@ -21,12 +21,23 @@ Or install it yourself as:
 ### Decrypt a document
 
 ```ruby
-  key_pem = File.read('path/to/key.pem')
-  xml = File.read('path/to/file.xml')
+key_pem = File.read('path/to/key.pem')
+xml = File.read('path/to/file.xml')
 
-  private_key = OpenSSL::PKey::RSA.new(key_pem)
-  decrypted_document = Xmlenc::EncryptedDocument.decrypt(private_key)
+private_key = OpenSSL::PKey::RSA.new(key_pem)
+decrypted_document = Xmlenc::EncryptedDocument.decrypt(private_key)
 ```
+
+### Supported algorithms
+
+Data algorithms
+http://www.w3.org/2001/04/xmlenc#tripledes-cbc
+http://www.w3.org/2001/04/xmlenc#aes128-cbc
+http://www.w3.org/2001/04/xmlenc#aes256-cbc
+
+Key algorithms
+http://www.w3.org/2001/04/xmlenc#rsa-1_5
+http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p (Without OAEPParams and only SHA1 digest methods)
 
 ## Contributing
 
