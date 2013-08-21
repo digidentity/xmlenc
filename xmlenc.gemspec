@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Xmlenc::VERSION
   spec.authors       = ["Benoist"]
   spec.email         = ["bclaassen@digidentity.eu"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
+  spec.description   = %q{A (partial)implementation of the XMLENC specificiation}
+  spec.summary       = %q{A (partial)implementation of the XMLENC specificiation}
+  spec.homepage      = "https://github.com/digidentity/xmlenc"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
