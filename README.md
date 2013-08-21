@@ -31,13 +31,19 @@ decrypted_document = Xmlenc::EncryptedDocument.decrypt(private_key)
 ### Supported algorithms
 
 Data algorithms
-http://www.w3.org/2001/04/xmlenc#tripledes-cbc
-http://www.w3.org/2001/04/xmlenc#aes128-cbc
-http://www.w3.org/2001/04/xmlenc#aes256-cbc
+* http://www.w3.org/2001/04/xmlenc#tripledes-cbc
+* http://www.w3.org/2001/04/xmlenc#aes128-cbc
+* http://www.w3.org/2001/04/xmlenc#aes256-cbc
 
 Key algorithms
-http://www.w3.org/2001/04/xmlenc#rsa-1_5
-http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p (Without OAEPParams and only SHA1 digest methods)
+
+* http://www.w3.org/2001/04/xmlenc#rsa-1_5
+* http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p (Without OAEPParams and only SHA1 digest methods)
+
+
+## Roadmap
+1. add encryption (in progress)
+2. support more algorithms
 
 ## Contributing
 
