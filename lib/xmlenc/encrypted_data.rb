@@ -6,6 +6,11 @@ module Xmlenc
         'http://www.w3.org/2001/04/xmlenc#aes256-cbc'    => Algorithms::AESCBC[256]
     }
 
+    TYPES = {
+        'http://www.w3.org/2001/04/xmlenc#Element' => :element,
+        'http://www.w3.org/2001/04/xmlenc#Content' => :content,
+    }
+
     attr_accessor :node
 
     def initialize(node)
@@ -26,7 +31,13 @@ module Xmlenc
 
     def decrypt(key)
       decryptor = algorithm.setup(key)
-      decryptor.decrypt(Base64.decode64(cipher_value), node: encryption_method)
+      decrypted = decryptor.decrypt(Base64.decode64(cipher_value), node: encryption_method)
+      @node.replace(decrypted)
+      decrypted
+    end
+
+    def type
+      TYPES[@node['Type']]
     end
 
     private

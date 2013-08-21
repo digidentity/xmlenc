@@ -8,8 +8,13 @@ module Xmlenc
       end
 
       def decrypt(cipher_value, options = {})
-        verify_algorithm(options[:node])
+        verify_algorithm(options[:node]) if options[:node]
         @key.private_decrypt(cipher_value, OpenSSL::PKey::RSA::PKCS1_OAEP_PADDING)
+      end
+
+      def encrypt(data, options = {})
+        verify_algorithm(options[:node]) if options[:node]
+        @key.public_encrypt(data, OpenSSL::PKey::RSA::PKCS1_OAEP_PADDING)
       end
 
       private

@@ -13,7 +13,7 @@ module Xmlenc
   end
 
   module Algorithms
-    autoload :Rsa15, 'xmlenc/algorithms/rsa_15'
+    autoload :RSA15, 'xmlenc/algorithms/rsa_15'
     autoload :RsaOaepMgf1p, 'xmlenc/algorithms/rsa_oaep_mgf1p'
     autoload :DES3CBC, 'xmlenc/algorithms/des3_cbc'
     autoload :AESCBC, 'xmlenc/algorithms/aes_cbc'

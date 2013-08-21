@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Xmlenc::EncryptedData do
+  let(:plain_xml) { File.read('spec/fixtures/phaos/payment.xml') }
   let(:encrypted_xml) { File.read('spec/fixtures/encrypted_document.xml') }
   let(:doc) { Nokogiri::XML::Document.parse(encrypted_xml) }
   let(:encrypted_data_node) { doc.at_xpath('//xenc:EncryptedData', Xmlenc::NAMESPACES) }
@@ -76,5 +77,11 @@ describe Xmlenc::EncryptedData do
         XML
       end
     end
+  end
+
+  describe 'encrypt' do
+    let(:doc) { Nokogiri::XML::Document.parse(plain_xml) }
+
+
   end
 end

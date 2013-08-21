@@ -7,7 +7,7 @@ module Xmlenc
     end
 
     def document
-      @document = Nokogiri::XML::Document.parse(xml)
+      @document ||= Nokogiri::XML::Document.parse(xml)
     end
 
     def encrypted_keys
@@ -17,10 +17,8 @@ module Xmlenc
     def decrypt(key)
       encrypted_keys.each do |encrypted_key|
         encrypted_data = encrypted_key.encrypted_data
-
         data_key       = encrypted_key.decrypt(key)
-        decrypted_data = encrypted_data.decrypt(data_key)
-        encrypted_data.node.replace(decrypted_data)
+        encrypted_data.decrypt(data_key)
       end
       @document.to_xml
     end

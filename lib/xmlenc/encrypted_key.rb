@@ -1,7 +1,7 @@
 module Xmlenc
   class EncryptedKey
     ALGORITHMS = {
-        'http://www.w3.org/2001/04/xmlenc#rsa-1_5'        => Algorithms::Rsa15,
+        'http://www.w3.org/2001/04/xmlenc#rsa-1_5'        => Algorithms::RSA15,
         'http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p' => Algorithms::RsaOaepMgf1p
     }
 
