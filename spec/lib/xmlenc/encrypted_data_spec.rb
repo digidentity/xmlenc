@@ -85,13 +85,13 @@ describe Xmlenc::EncryptedData do
     let(:data) { subject.decrypt(key) }
 
     it 'stores the encrypted value in the cipher value' do
-      encrypted = encrypted_data_template.encrypt(key, data)
+      key = encrypted_data_template.encrypt(data)
 
-      expect(encrypted_data_template.cipher_value).to be == Base64.encode64(encrypted).gsub(/[\n\s]/, '')
+      expect(encrypted_data_template.cipher_value.length).to be > 0
     end
 
-    it 'allows decryption' do
-      encrypted_data_template.encrypt(key, data)
+    it 'allows decryption with the key' do
+      key = encrypted_data_template.encrypt(data)
 
       expect(encrypted_data_template.decrypt(key)).to be == data
     end
