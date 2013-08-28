@@ -12,7 +12,9 @@ module Xmlenc
       end
 
       def setup(key)
-        @key = key
+        @cipher= nil
+        @iv    = nil
+        @key   = key
         self
       end
 
@@ -26,7 +28,7 @@ module Xmlenc
       def encrypt(data, options = {})
         cipher.encrypt
         cipher.key = @key
-        cipher.iv = iv
+        cipher.iv  = iv
         iv << cipher.update(data) << cipher.final
       end
 
