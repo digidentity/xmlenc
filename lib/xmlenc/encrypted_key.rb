@@ -25,9 +25,19 @@ module Xmlenc
       at_xpath('./xenc:CipherData/xenc:CipherValue').content.gsub(/[\n\s]/, '')
     end
 
+    def cipher_value=(value)
+      at_xpath('./xenc:CipherData/xenc:CipherValue').content = value
+    end
+
     def decrypt(key)
       decryptor = algorithm.new(key)
       decryptor.decrypt(Base64.decode64(cipher_value), node: encryption_method)
+    end
+
+    def encrypt(key, data)
+      encryptor = algorithm.new(key)
+      encrypted = encryptor.encrypt(data, node: encryption_method)
+      self.cipher_value = Base64.encode64(encrypted)
     end
 
     private
