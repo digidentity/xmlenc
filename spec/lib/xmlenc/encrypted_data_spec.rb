@@ -80,8 +80,20 @@ describe Xmlenc::EncryptedData do
   end
 
   describe 'encrypt' do
-    let(:doc) { Nokogiri::XML::Document.parse(plain_xml) }
+    let(:template_node) { Nokogiri::XML::Document.parse(File.read('spec/fixtures/template.xml')).root }
+    let(:encrypted_data_template) { described_class.new(template_node) }
+    let(:data) { subject.decrypt(key) }
 
+    it 'stores the encrypted value in the cipher value' do
+      encrypted = encrypted_data_template.encrypt(key, data)
 
+      expect(encrypted_data_template.cipher_value).to be == Base64.encode64(encrypted).gsub(/[\n\s]/, '')
+    end
+
+    it 'allows decryption' do
+      encrypted_data_template.encrypt(key, data)
+
+      expect(encrypted_data_template.decrypt(key)).to be == data
+    end
   end
 end
