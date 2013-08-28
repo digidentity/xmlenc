@@ -5,8 +5,8 @@ module Xmlenc
         new(key)
       end
 
-      def initialize(key)
-        @key = key
+      def initialize(key = nil)
+        @key = key || cipher.random_key
       end
 
       def decrypt(cipher_value, options = {})
@@ -21,6 +21,10 @@ module Xmlenc
         cipher.key = @key
         cipher.iv  = iv
         iv << cipher.update(data) << cipher.final
+      end
+
+      def key
+        @key
       end
 
       private

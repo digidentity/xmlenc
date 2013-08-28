@@ -11,10 +11,10 @@ module Xmlenc
         @size = size
       end
 
-      def setup(key)
+      def setup(key = nil)
         @cipher= nil
         @iv    = nil
-        @key   = key
+        @key   = key || cipher.random_key
         self
       end
 
@@ -30,6 +30,10 @@ module Xmlenc
         cipher.key = @key
         cipher.iv  = iv
         iv << cipher.update(data) << cipher.final
+      end
+
+      def key
+        @key
       end
 
       private

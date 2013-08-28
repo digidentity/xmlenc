@@ -40,11 +40,11 @@ module Xmlenc
       decrypted
     end
 
-    def encrypt(key, data)
-      encryptor = algorithm.setup(key)
+    def encrypt(data)
+      encryptor = algorithm.setup
       encrypted = encryptor.encrypt(data, node: encryption_method)
       self.cipher_value = Base64.encode64(encrypted)
-      encrypted
+      encryptor.key
     end
 
     def type
