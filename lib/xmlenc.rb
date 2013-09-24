@@ -19,6 +19,7 @@ module Xmlenc
 
   module Builder
     autoload :Base, 'xmlenc/builder/base'
+    autoload :EncryptedData, 'xmlenc/builder/encrypted_data'
     autoload :EncryptionMethod, 'xmlenc/builder/encryption_method'
     autoload :EncryptedKey, 'xmlenc/builder/encrypted_key'
     autoload :KeyInfo, 'xmlenc/builder/key_info'
