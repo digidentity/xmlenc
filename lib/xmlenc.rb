@@ -1,3 +1,5 @@
+require 'active_support/all'
+require 'active_model'
 require 'xmlenc/version'
 require 'openssl'
 require 'base64'
@@ -10,6 +12,13 @@ module Xmlenc
   }
 
   class UnsupportedError < StandardError
+  end
+
+  class UnparseableMessage < StandardError
+  end
+
+  module Builder
+    autoload :Base, 'xmlenc/builder/base'
   end
 
   module Algorithms
