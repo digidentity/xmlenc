@@ -23,6 +23,10 @@ module Xmlenc
     autoload :EncryptedKey, 'xmlenc/builder/encrypted_key'
     autoload :KeyInfo, 'xmlenc/builder/key_info'
     autoload :CipherData, 'xmlenc/builder/cipher_data'
+
+    module ComplexTypes
+      autoload :EncryptedType, 'xmlenc/builder/complex_types/encrypted_type'
+    end
   end
 
   module Algorithms
