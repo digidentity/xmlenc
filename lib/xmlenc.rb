@@ -1,3 +1,5 @@
+require 'active_support/all'
+require 'active_model'
 require 'xmlenc/version'
 require 'openssl'
 require 'base64'
@@ -10,6 +12,22 @@ module Xmlenc
   }
 
   class UnsupportedError < StandardError
+  end
+
+  class UnparseableMessage < StandardError
+  end
+
+  module Builder
+    autoload :Base, 'xmlenc/builder/base'
+    autoload :EncryptedData, 'xmlenc/builder/encrypted_data'
+    autoload :EncryptionMethod, 'xmlenc/builder/encryption_method'
+    autoload :EncryptedKey, 'xmlenc/builder/encrypted_key'
+    autoload :KeyInfo, 'xmlenc/builder/key_info'
+    autoload :CipherData, 'xmlenc/builder/cipher_data'
+
+    module ComplexTypes
+      autoload :EncryptedType, 'xmlenc/builder/complex_types/encrypted_type'
+    end
   end
 
   module Algorithms
