@@ -19,6 +19,7 @@ module Xmlenc
 
   module Builder
     autoload :Base, 'xmlenc/builder/base'
+    autoload :CipherData, 'xmlenc/builder/cipher_data'
   end
 
   module Algorithms
