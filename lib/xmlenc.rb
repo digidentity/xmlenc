@@ -19,6 +19,7 @@ module Xmlenc
 
   module Builder
     autoload :Base, 'xmlenc/builder/base'
+    autoload :EncryptionMethod, 'xmlenc/builder/encryption_method'
     autoload :CipherData, 'xmlenc/builder/cipher_data'
   end
 
