@@ -1,7 +1,7 @@
 module Xmlenc
   module Builder
     class EncryptedKey
-      include Xmlenc::Builder::Base
+      include Xmlenc::Builder::ComplexTypes::EncryptedType
 
       tag "EncryptedKey"
 
