@@ -36,19 +36,16 @@ describe Xmlenc::Builder::ComplexTypes::EncryptedType do
   end
 
   describe "#parse" do
-    it "should create a collection of EncryptionMethod" do
-      expect(subject.encryption_method).to be_an Array
-      expect(subject.encryption_method.first).to be_an Xmlenc::Builder::EncryptionMethod
+    it "should create an EncryptionMethod element" do
+      expect(subject.encryption_method).to be_an Xmlenc::Builder::EncryptionMethod
     end
 
-    it "should create a collection of KeyInfo" do
-      expect(subject.key_info).to be_an Array
-      expect(subject.key_info.first).to be_a Xmlenc::Builder::KeyInfo
+    it "should create a KeyInfo element" do
+      expect(subject.key_info).to be_a Xmlenc::Builder::KeyInfo
     end
 
-    it "should create a collection of CipherData" do
-      expect(subject.cipher_data).to be_an Array
-      expect(subject.cipher_data.first).to be_a Xmlenc::Builder::CipherData
+    it "should create a CipherData element" do
+      expect(subject.cipher_data).to be_a Xmlenc::Builder::CipherData
     end
   end
 end
