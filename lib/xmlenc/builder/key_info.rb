@@ -10,7 +10,7 @@ module Xmlenc
 
       element :key_name, String, namespace: "ds", tag: "KeyName"
 
-      has_one :encrypted_key, Xmlenc::Builder::EncryptedKey
+      has_one :encrypted_key, Xmlenc::Builder::EncryptedKey, xpath: "./"
     end
   end
 end

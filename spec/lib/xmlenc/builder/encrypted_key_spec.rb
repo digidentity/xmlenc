@@ -33,6 +33,33 @@ describe Xmlenc::Builder::EncryptedKey do
     it "should create an EncryptedKey" do
       expect(subject).to be_a Xmlenc::Builder::EncryptedKey
     end
-  end
 
+    describe "encryption method" do
+      it "should create an EncryptionMethod element" do
+        expect(subject.encryption_method).to be_a Xmlenc::Builder::EncryptionMethod
+      end
+
+      it "should parse the algorithm" do
+        expect(subject.encryption_method.algorithm).to eq "http://www.w3.org/2001/04/xmlenc#rsa-1_5"
+      end
+    end
+
+    describe "key info" do
+      it "should create a KeyInfo element" do
+        expect(subject.key_info).to be_a Xmlenc::Builder::KeyInfo
+      end
+    end
+
+    describe "cipher data" do
+      it "should create a CipherData element" do
+        expect(subject.cipher_data).to be_a Xmlenc::Builder::CipherData
+      end
+
+      let(:cipher_value) { subject.cipher_data.cipher_value.gsub(/[\n\s]/, "") }
+
+      it "should parse the cipher value" do
+        expect(cipher_value).to eq "cCxxYh3xGBTqlXbhmKxWzNMlHeE28E7vPrMyM5V4T+t1Iy2csj1BoQ7cqBjEhqEyEot4WNRYsY7P44mWBKurj2mdWQWgoxHvtITP9AR3JTMxUo3TF5ltW76DLDsEvWlEuZKam0PYj6lYPKd4npUULeZyR/rDRrth/wFIBD8vbQlUsBHapNT9MbQfSKZemOuTUJL9PNgsosySpKrX564oQw398XsxfTFxi4hqbdqzA/CLL418X01hUjIHdyv6XnA298Bmfv9WMPpX05udR4raDv5X8NWxjH00hAhasM3qumxoyCT6mAGfqvE23I+OXtrNlUvE9mMjANw4zweCHsOcfw=="
+      end
+    end
+  end
 end
