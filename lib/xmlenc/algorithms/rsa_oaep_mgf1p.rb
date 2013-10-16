@@ -13,7 +13,6 @@ module Xmlenc
       end
 
       def encrypt(data, options = {})
-        verify_algorithm(options[:node]) if options[:node]
         @key.public_encrypt(data, OpenSSL::PKey::RSA::PKCS1_OAEP_PADDING)
       end
 

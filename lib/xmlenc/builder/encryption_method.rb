@@ -9,6 +9,7 @@ module Xmlenc
       namespace "xenc"
 
       attribute :algorithm, String, tag: "Algorithm"
+      has_one :digest_method, Xmlenc::Builder::DigestMethod
 
       validates :algorithm, presence: true
     end

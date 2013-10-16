@@ -2,8 +2,11 @@ require "spec_helper"
 
 describe Xmlenc::Builder::EncryptedData do
 
-  let(:xml) { File.read File.join("spec", "fixtures", "encrypted_document.xml") }
+  let(:xml) { File.read File.join("spec", "fixtures", "template.xml") }
   subject   { described_class.parse(xml, single: true) }
+
+  #tijdelijk voor assertion testing
+  let(:assertion_xml) {File.read File.join("spec", "fixtures", "assertion.xml") }
 
   describe "required fields" do
     it "should have the cipher data field" do
@@ -26,6 +29,36 @@ describe Xmlenc::Builder::EncryptedData do
         subject.send("#{field}=", nil)
         expect(subject).to be_valid
       end
+    end
+  end
+
+  describe "from assertion" do
+    it "is should work!" do
+      raw_cert = <<-CERT
+        MIICgjCCAeugAwIBAgIBADANBgkqhkiG9w0BAQUFADA6MQswCQYDVQQGEwJCRTEN
+        MAsGA1UECgwEVGVzdDENMAsGA1UECwwEVGVzdDENMAsGA1UEAwwEVGVzdDAeFw0x
+        MzAxMTQxMzM5NTBaFw0xNDAxMTQxMzM5NTBaMDoxCzAJBgNVBAYTAkJFMQ0wCwYD
+        VQQKDARUZXN0MQ0wCwYDVQQLDARUZXN0MQ0wCwYDVQQDDARUZXN0MIGfMA0GCSqG
+        SIb3DQEBAQUAA4GNADCBiQKBgQDgJhsC/EH+FebE7OfgwWyQgSxXiY4i5XMj/U+M
+        JUsZ1O2jb70aMkb3hwXKGPWBV0fHHKkdeugchxKx/973fvrkgiYWiy3j6yUyBzSg
+        WoCKcZGZEng5cgA9L/6roVkpnjNCYc49PQYa68+cLy419ooWSEYnTFlDpUiShvil
+        jEWT6wIDAQABo4GXMIGUMA8GA1UdEwEB/wQFMAMBAf8wHQYDVR0OBBYEFBJIbgZX
+        Unf4On2C9KiGNrvcBXvvMGIGA1UdIwRbMFmAFBJIbgZXUnf4On2C9KiGNrvcBXvv
+        oT6kPDA6MQswCQYDVQQGEwJCRTENMAsGA1UECgwEVGVzdDENMAsGA1UECwwEVGVz
+        dDENMAsGA1UEAwwEVGVzdIIBADANBgkqhkiG9w0BAQUFAAOBgQDJcmmrA4y1K/TL
+        MLA/zWf90snZubfCFC1iR3gBSKi5v49OxM4vkZSLo9gQfUJGwohPqld/PB6B1o1g
+        pHEcbxWEgFnL+3irPcNLpcXPLNvbpzHjCOhVvRHIwIw+ZwlWir1yQKYcNXIPUFRq
+        dRRsAwyOT8Qv3yGWNPYzNQ16qzPYJg==
+      CERT
+
+      certificate   = OpenSSL::X509::Certificate.new(Base64.decode64(raw_cert))
+      symmetric_key = subject.encrypt(assertion_xml)
+
+      encrypted_key = subject.key_info.encrypted_key
+
+      encrypted_key.encrypt(certificate.public_key, symmetric_key)
+
+      puts subject.to_xml
     end
   end
 
