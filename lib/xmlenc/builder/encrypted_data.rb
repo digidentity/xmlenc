@@ -23,6 +23,10 @@ module Xmlenc
         'http://www.w3.org/2001/04/xmlenc#Element'
       end
 
+      def initialize(attributes = {})
+        super
+        self.id = SecureRandom.hex(5)
+      end
 
       def decrypt(key)
         decryptor = algorithm.setup(key)
@@ -35,7 +39,10 @@ module Xmlenc
         encryptor = algorithm.setup
         encrypted = encryptor.encrypt(data, node: encryption_method)
         cipher_data.cipher_value = Base64.encode64(encrypted)
-        encryptor.key
+
+        encrypted_key = EncryptedKey.new(data: encryptor.key)
+        encrypted_key.add_data_reference(id)
+        encrypted_key
       end
 
       private

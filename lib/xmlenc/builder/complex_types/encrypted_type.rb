@@ -14,6 +14,15 @@ module Xmlenc
 
           validates :cipher_data, presence: true
         end
+
+        def initialize(attributes = {})
+          super
+          self.cipher_data = CipherData.new
+        end
+
+        def set_encryption_method(attributes = {})
+          self.encryption_method = EncryptionMethod.new(attributes)
+        end
       end
     end
   end
