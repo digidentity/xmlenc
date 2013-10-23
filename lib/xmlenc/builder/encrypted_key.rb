@@ -26,6 +26,8 @@ module Xmlenc
         self.reference_list.add_data_reference(data_id)
       end
 
+      private
+
       def algorithm
         algorithm = encryption_method.algorithm
         ALGORITHMS[algorithm] ||
