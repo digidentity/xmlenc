@@ -24,6 +24,9 @@ module Xmlenc
     autoload :EncryptedKey, 'xmlenc/builder/encrypted_key'
     autoload :KeyInfo, 'xmlenc/builder/key_info'
     autoload :CipherData, 'xmlenc/builder/cipher_data'
+    autoload :DigestMethod, 'xmlenc/builder/digest_method'
+    autoload :ReferenceList, 'xmlenc/builder/reference_list'
+    autoload :DataReference, 'xmlenc/builder/data_reference'
 
     module ComplexTypes
       autoload :EncryptedType, 'xmlenc/builder/complex_types/encrypted_type'
