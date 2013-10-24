@@ -27,6 +27,14 @@ describe Xmlenc::Builder::EncryptedKey do
         expect(subject).to be_valid
       end
     end
+
+    it "should have a reference_list" do
+      expect(subject.reference_list).to be_a Xmlenc::Builder::ReferenceList
+    end
+
+    it "should have a data object" do
+      expect(subject).to respond_to :data
+    end
   end
 
   describe "#parse" do
