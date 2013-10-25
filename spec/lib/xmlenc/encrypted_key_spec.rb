@@ -105,8 +105,6 @@ describe Xmlenc::EncryptedKey do
       encrypted_key_template.encrypt(public_key, data)
 
       expect(encrypted_key_template.cipher_value.length).to be > 0
-
-      puts encrypted_key_template.document.to_xml
     end
 
     it 'allows decryption with the key' do

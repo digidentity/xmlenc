@@ -34,6 +34,14 @@ describe Xmlenc::Builder::EncryptedKey do
       expect(subject).to be_a Xmlenc::Builder::EncryptedKey
     end
 
+    it "should have a reference_list" do
+      expect(subject.reference_list).to be_a Xmlenc::Builder::ReferenceList
+    end
+
+    it "should have a data object" do
+      expect(subject).to respond_to :data
+    end
+
     describe "encryption method" do
       it "should create an EncryptionMethod element" do
         expect(subject.encryption_method).to be_a Xmlenc::Builder::EncryptionMethod
@@ -60,6 +68,27 @@ describe Xmlenc::Builder::EncryptedKey do
       it "should parse the cipher value" do
         expect(cipher_value).to eq "cCxxYh3xGBTqlXbhmKxWzNMlHeE28E7vPrMyM5V4T+t1Iy2csj1BoQ7cqBjEhqEyEot4WNRYsY7P44mWBKurj2mdWQWgoxHvtITP9AR3JTMxUo3TF5ltW76DLDsEvWlEuZKam0PYj6lYPKd4npUULeZyR/rDRrth/wFIBD8vbQlUsBHapNT9MbQfSKZemOuTUJL9PNgsosySpKrX564oQw398XsxfTFxi4hqbdqzA/CLL418X01hUjIHdyv6XnA298Bmfv9WMPpX05udR4raDv5X8NWxjH00hAhasM3qumxoyCT6mAGfqvE23I+OXtrNlUvE9mMjANw4zweCHsOcfw=="
       end
+    end
+  end
+
+  describe "#add_data_reference" do
+    it "has method" do
+      expect(subject).to respond_to :add_data_reference
+    end
+
+    it "has one data reference" do
+      expect(subject.reference_list.data_references.count).to eq 1
+    end
+
+    it "adds an extra data reference" do
+      subject.add_data_reference(SecureRandom.hex(5))
+      expect(subject.reference_list.data_references.count).to eq 2
+    end
+  end
+
+  describe "#encrypt" do
+    it "has method" do
+      expect(subject).to respond_to :encrypt
     end
   end
 end
