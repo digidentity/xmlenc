@@ -12,7 +12,7 @@ module Xmlenc
 
       def add_data_reference(data_id)
         self.data_references ||= []
-        self.data_references << DataReference.new(uri: data_id)
+        self.data_references << DataReference.new(uri: "##{data_id}")
       end
     end
   end
