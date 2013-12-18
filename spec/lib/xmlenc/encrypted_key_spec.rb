@@ -33,8 +33,21 @@ describe Xmlenc::EncryptedKey do
   end
 
   describe 'encrypted_data' do
-    it 'returns the encrypted data element' do
-      expect(subject.encrypted_data).to be_a(Xmlenc::EncryptedData)
+    describe 'with reference list' do
+      it 'returns the encrypted data element' do
+        expect(subject.encrypted_data).to be_a(Xmlenc::EncryptedData)
+      end
+    end
+
+    describe 'without reference list' do
+      it 'returns the encrypted data element' do
+        xml_no_ref =  File.read('spec/fixtures/encrypted_document_no_ref_list.xml')
+        no_ref_doc = Nokogiri::XML::Document.parse(xml_no_ref)
+        encrypted_no_ref_key_node = no_ref_doc.at_xpath('//xenc:EncryptedKey', Xmlenc::NAMESPACES)
+        no_ref_node = Xmlenc::EncryptedKey.new(encrypted_no_ref_key_node)
+
+        expect(no_ref_node.encrypted_data).to be_a(Xmlenc::EncryptedData)
+      end
     end
   end
 
