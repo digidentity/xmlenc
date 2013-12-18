@@ -43,11 +43,19 @@ module Xmlenc
     private
 
     def referenced_node
-      document.at_xpath("//xenc:EncryptedData[@Id='#{reference_uri}']", NAMESPACES)
+      if reference_uri
+        document.at_xpath("//xenc:EncryptedData[@Id='#{reference_uri}']", NAMESPACES)
+      else
+        document.at_xpath("//xenc:EncryptedData", NAMESPACES)
+      end
     end
 
     def reference_uri
-      at_xpath('./xenc:ReferenceList/xenc:DataReference')['URI'][1..-1]
+      if at_xpath('./xenc:ReferenceList/xenc:DataReference')
+        at_xpath('./xenc:ReferenceList/xenc:DataReference')['URI'][1..-1]
+      else
+        nil
+      end
     end
 
     def at_xpath(xpath)
