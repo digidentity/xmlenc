@@ -43,10 +43,9 @@ describe Xmlenc::EncryptedKey do
       it 'returns the encrypted data element' do
         xml_no_ref =  File.read('spec/fixtures/encrypted_document_no_ref_list.xml')
         no_ref_doc = Nokogiri::XML::Document.parse(xml_no_ref)
-        encrypted_no_ref_key_node = no_ref_doc.at_xpath('//xenc:EncryptedKey', Xmlenc::NAMESPACES)
+        encrypted_no_ref_key_node = no_ref_doc.at_xpath("//xenc:EncryptedKey[@ID='second_key']", Xmlenc::NAMESPACES)
         no_ref_node = Xmlenc::EncryptedKey.new(encrypted_no_ref_key_node)
-
-        expect(no_ref_node.encrypted_data).to be_a(Xmlenc::EncryptedData)
+        expect(no_ref_node.encrypted_data.node['ID']).to be == 'second_data'
       end
     end
   end

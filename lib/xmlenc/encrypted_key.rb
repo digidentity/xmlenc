@@ -46,7 +46,8 @@ module Xmlenc
       if reference_uri
         document.at_xpath("//xenc:EncryptedData[@Id='#{reference_uri}']", NAMESPACES)
       else
-        document.at_xpath("//xenc:EncryptedData", NAMESPACES)
+        #document.at_xpath("//xenc:EncryptedData", NAMESPACES)
+        @node.at_xpath('ancestor::xenc:EncryptedData', Xmlenc::NAMESPACES)
       end
     end
 
