@@ -10,6 +10,18 @@ describe Xmlenc::EncryptedDocument do
     it 'returns the nokogiri document' do
       expect(subject.document).to be_a(Nokogiri::XML::Document)
     end
+
+    it 'raises on badly formed XML' do
+      badly_formed = <<-EOXML
+      <root>
+        <open>foo
+          <closed>bar</closed>
+      </root>
+      EOXML
+      expect {
+        described_class.new(badly_formed).document
+      }.to raise_error
+    end
   end
 
   describe 'encrypted_keys' do

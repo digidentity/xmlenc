@@ -7,7 +7,7 @@ module Xmlenc
     end
 
     def document
-      @document ||= Nokogiri::XML::Document.parse(xml)
+      @document ||= Nokogiri::XML(xml, nil, nil, Nokogiri::XML::ParseOptions::STRICT)
     end
 
     def encrypted_keys
