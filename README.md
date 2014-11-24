@@ -25,7 +25,8 @@ key_pem = File.read('path/to/key.pem')
 xml = File.read('path/to/file.xml')
 
 private_key = OpenSSL::PKey::RSA.new(key_pem)
-decrypted_document = Xmlenc::EncryptedDocument.decrypt(private_key)
+encrypted_document = Xmlenc::EncryptedDocument.new(xml)
+decrypted_document = encrypted_document.decrypt(private_key)
 ```
 
 ### Supported algorithms
