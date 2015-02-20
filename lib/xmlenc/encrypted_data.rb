@@ -35,14 +35,14 @@ module Xmlenc
 
     def decrypt(key)
       decryptor = algorithm.setup(key)
-      decrypted = decryptor.decrypt(Base64.decode64(cipher_value), node: encryption_method)
+      decrypted = decryptor.decrypt(Base64.decode64(cipher_value), :node => encryption_method)
       @node.replace(decrypted) unless @node == document.root
       decrypted
     end
 
     def encrypt(data)
       encryptor = algorithm.setup
-      encrypted = encryptor.encrypt(data, node: encryption_method)
+      encrypted = encryptor.encrypt(data, :node => encryption_method)
       self.cipher_value = Base64.encode64(encrypted)
       encryptor.key
     end

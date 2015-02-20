@@ -3,7 +3,7 @@ require "spec_helper"
 describe Xmlenc::Builder::ReferenceList do
 
   let(:xml) { File.read File.join("spec", "fixtures", "template2.xml") }
-  subject { described_class.parse(xml, single: true) }
+  subject { described_class.parse(xml, :single => true) }
 
   describe "#parse" do
     it "has data" do
