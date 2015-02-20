@@ -8,7 +8,7 @@ module Xmlenc
       register_namespace "xenc", Xmlenc::NAMESPACES[:xenc]
       namespace "xenc"
 
-      element :cipher_value, String, namespace: "xenc", tag: "CipherValue"
+      element :cipher_value, String, :namespace => "xenc", :tag => "CipherValue"
     end
   end
 end

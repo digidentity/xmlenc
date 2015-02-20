@@ -11,7 +11,7 @@ module Xmlenc
       tag "EncryptedKey"
       namespace "xenc"
 
-      has_one :reference_list, Xmlenc::Builder::ReferenceList, xpath: "./"
+      has_one :reference_list, Xmlenc::Builder::ReferenceList, :xpath => "./"
 
       attr_accessor :data
 

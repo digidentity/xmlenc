@@ -3,7 +3,7 @@ require "spec_helper"
 describe Xmlenc::Builder::EncryptionMethod do
 
   let(:xml) { File.read File.join("spec", "fixtures", "encrypted_document.xml") }
-  subject   { described_class.parse(xml, single: true) }
+  subject   { described_class.parse(xml, :single => true) }
 
   describe "required fields" do
     it "should have the algorithm field" do

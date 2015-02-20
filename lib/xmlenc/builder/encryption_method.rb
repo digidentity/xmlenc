@@ -8,14 +8,14 @@ module Xmlenc
       register_namespace "xenc", Xmlenc::NAMESPACES[:xenc]
       namespace "xenc"
 
-      attribute :algorithm, String, tag: "Algorithm"
+      attribute :algorithm, String, :tag => "Algorithm"
       has_one :digest_method, Xmlenc::Builder::DigestMethod
 
-      validates :algorithm, presence: true
+      validates :algorithm, :presence => true
 
       def initialize(attributes = {})
         digest_method_algorithm = attributes.delete(:digest_method_algorithm)
-        attributes[:digest_method] = Xmlenc::Builder::DigestMethod.new(algorithm: digest_method_algorithm)
+        attributes[:digest_method] = Xmlenc::Builder::DigestMethod.new(:algorithm => digest_method_algorithm)
         super
       end
     end

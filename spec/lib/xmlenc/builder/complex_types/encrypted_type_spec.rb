@@ -9,7 +9,7 @@ end
 describe Xmlenc::Builder::ComplexTypes::EncryptedType do
 
   let(:xml) { File.read File.join("spec", "fixtures", "encrypted_document.xml") }
-  subject   { EncryptedTypeDummy.new.parse(xml, single: true) }
+  subject   { EncryptedTypeDummy.new.parse(xml, :single => true) }
 
   describe "required fields" do
     it "should have the cipher data field" do
