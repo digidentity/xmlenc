@@ -17,6 +17,7 @@ module Xmlenc
     def decrypt(key)
       encrypted_keys.each do |encrypted_key|
         encrypted_data = encrypted_key.encrypted_data
+        next unless encrypted_data.node
         data_key       = encrypted_key.decrypt(key)
         encrypted_data.decrypt(data_key)
       end
