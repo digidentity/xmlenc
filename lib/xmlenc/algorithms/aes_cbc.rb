@@ -20,9 +20,13 @@ module Xmlenc
 
       def decrypt(cipher_value, options = {})
         cipher.decrypt
-        cipher.key = @key
-        cipher.iv  = cipher_value[0...iv_len]
-        cipher.update(cipher_value[iv_len..-1]) << cipher.final
+        cipher.padding = 0
+        cipher.key     = @key
+        cipher.iv      = cipher_value[0...iv_len]
+        result         = cipher.update(cipher_value[iv_len..-1]) << cipher.final
+
+        padding_size   = result.last.unpack('c').first
+        result[0...-padding_size]
       end
 
       def encrypt(data, options = {})
