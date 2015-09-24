@@ -68,20 +68,23 @@ describe Xmlenc::EncryptedKey do
           SBMpGzkVfDuv8aAFXOtf+LV67Ov6hJAt7FB65tE9Hg==
         CV
 
-        encrypted_key_node.at_xpath('./xenc:EncryptionMethod', Xmlenc::NAMESPACES).replace <<-XML
+        fragment = <<-XML
           <EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p">
             <ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" xmlns:ds="http://www.w3.org/2000/09/xmldsig#"/>
           </EncryptionMethod>
         XML
+        encrypted_key_node.at_xpath('./xenc:EncryptionMethod', Xmlenc::NAMESPACES).replace(Nokogiri::XML::DocumentFragment.parse(fragment)) 
       end
 
       describe 'with unsupported digest method' do
         it 'raises an unsupported error' do
-          encrypted_key_node.at_xpath('./xenc:EncryptionMethod', Xmlenc::NAMESPACES).replace <<-XML
+          fragment = <<-XML
             <EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p">
               <ds:DigestMethod Algorithm="unsupported" xmlns:ds="http://www.w3.org/2000/09/xmldsig#"/>
             </EncryptionMethod>
           XML
+
+          encrypted_key_node.at_xpath('./xenc:EncryptionMethod', Xmlenc::NAMESPACES).replace(Nokogiri::XML::DocumentFragment.parse(fragment)) 
 
           expect {
             subject.decrypt(private_key)
@@ -96,9 +99,11 @@ describe Xmlenc::EncryptedKey do
 
     describe 'with unsupported algorithm' do
       it 'raises an unsupported error' do
-        encrypted_key_node.at_xpath('./xenc:EncryptionMethod', Xmlenc::NAMESPACES).replace <<-XML
+        fragment = <<-XML
           <EncryptionMethod Algorithm="unsupported"></EncryptionMethod>
         XML
+
+        encrypted_key_node.at_xpath('./xenc:EncryptionMethod', Xmlenc::NAMESPACES).replace(Nokogiri::XML::DocumentFragment.parse(fragment))
 
         expect {
           subject.decrypt(private_key)
