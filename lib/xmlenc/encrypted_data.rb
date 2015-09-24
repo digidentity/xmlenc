@@ -36,7 +36,7 @@ module Xmlenc
     def decrypt(key)
       decryptor = algorithm.setup(key)
       decrypted = decryptor.decrypt(Base64.decode64(cipher_value), :node => encryption_method)
-      @node.replace(decrypted) unless @node == document.root
+      @node.replace(Nokogiri::XML::DocumentFragment.parse(decrypted)) unless @node == document.root
       decrypted
     end
 
