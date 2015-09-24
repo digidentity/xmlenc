@@ -31,6 +31,8 @@ module Xmlenc
 
       module HappyMapperClassMethods
         def parse(xml, options = {})
+          raise Xmlenc::UnparseableMessage("Unable to parse nil document") if xml.nil?
+
           object = super
           if object.is_a?(Array)
             object.map { |x| x.from_xml = true }
