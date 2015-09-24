@@ -69,7 +69,7 @@ describe Xmlenc::EncryptedKey do
         CV
 
         fragment = <<-XML
-          <EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p">
+          <EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p" xmlns="http://www.w3.org/2001/04/xmlenc#">
             <ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" xmlns:ds="http://www.w3.org/2000/09/xmldsig#"/>
           </EncryptionMethod>
         XML
@@ -79,7 +79,7 @@ describe Xmlenc::EncryptedKey do
       describe 'with unsupported digest method' do
         it 'raises an unsupported error' do
           fragment = <<-XML
-            <EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p">
+            <EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p" xmlns="http://www.w3.org/2001/04/xmlenc#">
               <ds:DigestMethod Algorithm="unsupported" xmlns:ds="http://www.w3.org/2000/09/xmldsig#"/>
             </EncryptionMethod>
           XML
@@ -100,7 +100,7 @@ describe Xmlenc::EncryptedKey do
     describe 'with unsupported algorithm' do
       it 'raises an unsupported error' do
         fragment = <<-XML
-          <EncryptionMethod Algorithm="unsupported"></EncryptionMethod>
+          <EncryptionMethod Algorithm="unsupported" xmlns="http://www.w3.org/2001/04/xmlenc#"></EncryptionMethod>
         XML
 
         encrypted_key_node.at_xpath('./xenc:EncryptionMethod', Xmlenc::NAMESPACES).replace(Nokogiri::XML::DocumentFragment.parse(fragment))
