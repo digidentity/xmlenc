@@ -84,7 +84,7 @@ describe 'Phaos compatibility tests' do
       result     = cipher.update(data_cipher[cipher.iv_len..-1])
       result << cipher.final
 
-      doc.at_xpath('//xenc:EncryptedData', Xmlenc::NAMESPACES).replace(result)
+      doc.at_xpath('//xenc:EncryptedData', Xmlenc::NAMESPACES).replace(Nokogiri::XML::DocumentFragment.parse(result))
       expect(doc.to_xml.chomp).to be == plain_xml
     end
   end

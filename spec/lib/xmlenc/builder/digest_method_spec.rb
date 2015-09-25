@@ -12,7 +12,8 @@ describe Xmlenc::Builder::DigestMethod do
 
     it "raises error when no algorithm" do
       subject.algorithm = nil
-      expect(subject).to have(1).error_on :algorithm
+      expect(subject).to_not be_valid
+      expect(subject.errors[:algorithm].size).to eq(1)
     end
   end
 end

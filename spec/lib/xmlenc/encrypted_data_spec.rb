@@ -46,9 +46,10 @@ describe Xmlenc::EncryptedData do
 
     describe 'aes256-cbc' do
       it 'replaces returns the decrypted value' do
-        encrypted_data_node.at_xpath('./xenc:EncryptionMethod', Xmlenc::NAMESPACES).replace <<-XML
-          <EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#aes256-cbc"></EncryptionMethod>
+        fragment = <<-XML
+          <EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#aes256-cbc" xmlns="http://www.w3.org/2001/04/xmlenc#"></EncryptionMethod>
         XML
+        encrypted_data_node.at_xpath('./xenc:EncryptionMethod', Xmlenc::NAMESPACES).replace(Nokogiri::XML::DocumentFragment.parse(fragment))
         subject.stub(:cipher_value) { 'DpNYC0Np5hHaQAUyHWpM3MQ99wkDFtGRc7TywqxmhI4sJKDXM5SRjVlKf6st5wOz' }
         key = %w(b0621c35317af207b92e3a6b317a122a93772a7261e3f13a4297eb64a91af10a).pack('H*')
 
@@ -58,9 +59,11 @@ describe Xmlenc::EncryptedData do
 
     describe 'des3-cbc' do
       it 'replaces returns the decrypted value' do
-        encrypted_data_node.at_xpath('./xenc:EncryptionMethod', Xmlenc::NAMESPACES).replace <<-XML
-            <EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#tripledes-cbc"></EncryptionMethod>
+        fragment = <<-XML
+            <EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#tripledes-cbc" xmlns="http://www.w3.org/2001/04/xmlenc#"></EncryptionMethod>
         XML
+
+        encrypted_data_node.at_xpath('./xenc:EncryptionMethod', Xmlenc::NAMESPACES).replace(Nokogiri::XML::DocumentFragment.parse(fragment))
         subject.stub(:cipher_value) { 'kY6scZxpyRXQbaDZp+LbuvSFYgmI3pQrfsrCVt3/9sZzpeUTPXJEatQ5KPOXYpJC
                                       Gid01h/T8PIezic0Ooz/jU+r3kYMKesMYiXin4CXTZYcGhd0TjmOd4kg1vlhE8kt
                                       WLC7JDzFLPAqXbOug3ghmWunFiUETbGJaF5V4AHIoZrYP+RS3DTLgJcATuDeWyOd
