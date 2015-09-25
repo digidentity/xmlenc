@@ -12,7 +12,8 @@ describe Xmlenc::Builder::EncryptedData do
 
     it "should check the presence of cipher data" do
       subject.cipher_data = nil
-      expect(subject).to have(1).error_on :cipher_data
+      expect(subject).to_not be_valid
+      expect(subject.errors[:cipher_data].size).to eq(1)
     end
   end
 

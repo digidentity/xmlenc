@@ -31,7 +31,7 @@ describe Xmlenc::EncryptedDocument do
 
     it 'converts the elements to EncryptedKey' do
       all_converted = subject.encrypted_keys.all? { |ek| ek.is_a?(Xmlenc::EncryptedKey) }
-      expect(all_converted).to be_true
+      expect(all_converted).to be_truthy
     end
   end
 

@@ -12,7 +12,8 @@ describe Xmlenc::Builder::EncryptionMethod do
 
     it "should check the presence of algorithm" do
       subject.algorithm = nil
-      expect(subject).to have(1).error_on :algorithm
+      expect(subject).to_not be_valid
+      expect(subject.errors[:algorithm].size).to eq(1)
     end
   end
 
