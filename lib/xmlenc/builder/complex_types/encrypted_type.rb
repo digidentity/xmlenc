@@ -23,6 +23,13 @@ module Xmlenc
         def set_encryption_method(attributes = {})
           self.encryption_method = EncryptionMethod.new(attributes)
         end
+
+        def set_key_name(key_name)
+          if key_name
+            self.key_info ||= KeyInfo.new
+            self.key_info.key_name = key_name
+          end
+        end
       end
     end
   end

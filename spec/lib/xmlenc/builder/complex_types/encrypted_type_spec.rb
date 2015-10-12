@@ -36,6 +36,24 @@ describe Xmlenc::Builder::ComplexTypes::EncryptedType do
     end
   end
 
+  describe "#set_key_name" do
+    it "sets the key info with the key name" do
+      subject.set_key_name("key name")
+      expect(subject.key_info.key_name).to eq "key name"
+    end
+
+    it "does not override old key info data" do
+      subject.set_key_name("key name")
+      expect(subject.key_info.encrypted_key).not_to be_nil
+    end
+
+    it "does not set the key info element if the keyname is nil" do
+      subject.key_info = nil
+      subject.set_key_name(nil)
+      expect(subject.key_info).to be_nil
+    end
+  end
+
   describe "#parse" do
     describe "encryption method" do
       it "should create an EncryptionMethod element" do
