@@ -23,19 +23,31 @@ module Xmlenc
         'http://www.w3.org/2001/04/xmlenc#Element'
       end
 
-      def initialize(attributes = {})
-        super
-        self.id = SecureRandom.hex(5)
+      def initialize(*args)
+        options = args.extract_options!
+        if options.key?(:id)
+          self.id = options.delete(:id)
+        else
+          self.id = SecureRandom.hex(5)
+        end
+        super(*(args << options))
       end
 
-      def encrypt(data)
+      def encrypt(data, key_options = {})
         encryptor = algorithm.setup
         encrypted = encryptor.encrypt(data, :node => encryption_method)
         cipher_data.cipher_value = Base64.encode64(encrypted)
-
-        encrypted_key = EncryptedKey.new(:data => encryptor.key)
+        key_params = { :data => encryptor.key }
+        encrypted_key = EncryptedKey.new(key_params.merge(key_options))
         encrypted_key.add_data_reference(id)
         encrypted_key
+      end
+
+      def set_key_retrieval_method(retrieval_method)
+        if retrieval_method
+          self.key_info ||= KeyInfo.new
+          self.key_info.retrieval_method = retrieval_method
+        end
       end
 
       private

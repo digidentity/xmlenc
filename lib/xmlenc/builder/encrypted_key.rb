@@ -11,6 +11,9 @@ module Xmlenc
       tag "EncryptedKey"
       namespace "xenc"
 
+      attribute :id, String, tag: 'Id'
+      attribute :recipient, String, tag: 'Recipient'
+
       has_one :reference_list, Xmlenc::Builder::ReferenceList, :xpath => "./"
 
       attr_accessor :data
@@ -24,6 +27,13 @@ module Xmlenc
       def add_data_reference(data_id)
         self.reference_list ||= ReferenceList.new
         self.reference_list.add_data_reference(data_id)
+      end
+
+      def initialize(*args)
+        options = args.extract_options!
+        @recipient = options.delete(:recipient)
+        @id = options.delete(:id)
+        super(*(args << options))
       end
 
       private
