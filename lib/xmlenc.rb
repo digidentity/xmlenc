@@ -27,6 +27,7 @@ module Xmlenc
     autoload :DigestMethod, 'xmlenc/builder/digest_method'
     autoload :ReferenceList, 'xmlenc/builder/reference_list'
     autoload :DataReference, 'xmlenc/builder/data_reference'
+    autoload :RetrievalMethod, 'xmlenc/builder/retrieval_method'
 
     module ComplexTypes
       autoload :EncryptedType, 'xmlenc/builder/complex_types/encrypted_type'

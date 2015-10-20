@@ -9,6 +9,7 @@ module Xmlenc
       namespace "ds"
 
       element :key_name, String, :namespace => "ds", :tag => "KeyName"
+      has_many :retrieval_method, Xmlenc::Builder::RetrievalMethod, :tag => "RetrievalMethod"
 
       has_one :encrypted_key, Xmlenc::Builder::EncryptedKey, :xpath => "./"
     end

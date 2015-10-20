@@ -27,4 +27,20 @@ describe Xmlenc::Builder::EncryptionMethod do
     end
   end
 
+  describe "#digest_method" do
+    subject { described_class.new() }
+
+    it 'has an empty digest_method' do
+      expect(subject.digest_method).to eq nil
+    end
+
+    context "digest_method_algorithm given" do
+      subject { described_class.new(digest_method_algorithm: 'ALGO') }
+
+      it 'has no empty digest_method' do
+        expect(subject.digest_method).not_to eq nil
+      end
+    end
+  end
+
 end

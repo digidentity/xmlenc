@@ -6,19 +6,21 @@ describe Xmlenc::Builder::EncryptedKey do
   subject   { described_class.parse(xml, :single => true) }
 
   describe "required fields" do
-    it "should have the cipher data field" do
-      expect(subject).to respond_to :cipher_data
-    end
+    [:cipher_data].each do |field|
+      it "should have the #{field} field" do
+        expect(subject).to respond_to :cipher_data
+      end
 
-    it "should check the presence of cipher data" do
-      subject.cipher_data = nil
-      expect(subject).to_not be_valid
-      expect(subject.errors[:cipher_data].size).to eq(1)
+      it "should check the presence of #{field}" do
+        subject.cipher_data = nil
+        expect(subject).to_not be_valid
+        expect(subject.errors[:cipher_data].size).to eq(1)
+      end
     end
   end
 
   describe "optional fields" do
-    [:encryption_method, :key_info].each do |field|
+    [:id, :recipient, :encryption_method, :key_info].each do |field|
       it "should have the #{field} field" do
         expect(subject).to respond_to field
       end
@@ -72,6 +74,12 @@ describe Xmlenc::Builder::EncryptedKey do
     end
   end
 
+  describe "#encrypt" do
+    it "has method" do
+      expect(subject).to respond_to :encrypt
+    end
+  end
+
   describe "#add_data_reference" do
     it "has method" do
       expect(subject).to respond_to :add_data_reference
@@ -87,9 +95,18 @@ describe Xmlenc::Builder::EncryptedKey do
     end
   end
 
-  describe "#encrypt" do
-    it "has method" do
-      expect(subject).to respond_to :encrypt
+  describe "#initialize" do
+    it 'initializes an EncryptedKey' do
+      expect(described_class.new()).to be_a described_class
+    end
+
+    context 'with extra options' do
+      subject { described_class.new(id: 'AN_ID', recipient: 'A_RECIPIENT') }
+
+      it 'sets @recipient and @id' do
+        expect(subject.id).to eq 'AN_ID'
+        expect(subject.recipient).to eq 'A_RECIPIENT'
+      end
     end
   end
 end
