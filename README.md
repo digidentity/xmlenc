@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/digidentity/xmlenc.svg)](https://travis-ci.org/digidentity/xmlenc)
+[![Coverage Status](https://coveralls.io/repos/digidentity/xmlenc/badge.svg?branch=master&service=github)](https://coveralls.io/github/digidentity/xmlenc?branch=master)
+[![Code Climate](https://codeclimate.com/github/digidentity/xmlenc/badges/gpa.svg)](https://codeclimate.com/github/digidentity/xmlenc)
+
 # Xmlenc
 
 This gem is a (partial) implementation of the XMLEncryption specification (http://www.w3.org/TR/xmlenc-core/)
