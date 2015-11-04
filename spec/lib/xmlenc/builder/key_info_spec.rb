@@ -7,7 +7,7 @@ describe Xmlenc::Builder::KeyInfo do
 
   describe "optional fields" do
     subject { described_class.new }
-    
+
     [:key_name, :retrieval_method, :encrypted_key].each do |field|
       it "should have the #{field} field" do
         expect(subject).to respond_to field
