@@ -39,5 +39,13 @@ describe Xmlenc::EncryptedDocument do
     it 'replaces the encrypted data with the unencrypted elements' do
       expect(subject.decrypt(private_key).chomp).to be == plain_xml
     end
+
+    context 'when encryption key is missing encryption data' do
+      let(:encrypted_xml) { File.read('spec/fixtures/encrypted_document_without_data.xml') }
+
+      it 'raises an error if the encrypted data cannot be found' do
+        expect { subject.decrypt(private_key).chomp }.to raise_error(Xmlenc::EncryptedDataNotFound)
+      end
+    end
   end
 end

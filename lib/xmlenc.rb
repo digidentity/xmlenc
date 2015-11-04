@@ -11,11 +11,10 @@ module Xmlenc
       :ds =>   'http://www.w3.org/2000/09/xmldsig#'
   }
 
-  class UnsupportedError < StandardError
-  end
-
-  class UnparseableMessage < StandardError
-  end
+  class Error < StandardError; end
+  class UnsupportedError < Error; end
+  class UnparseableMessage < Error; end
+  class EncryptedDataNotFound < Error; end
 
   module Builder
     autoload :Base, 'xmlenc/builder/base'

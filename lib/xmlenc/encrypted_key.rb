@@ -44,10 +44,11 @@ module Xmlenc
 
     def referenced_node
       if reference_uri
-        document.at_xpath("//xenc:EncryptedData[@Id='#{reference_uri}']", NAMESPACES)
+        document.at_xpath("//xenc:EncryptedData[@Id='#{reference_uri}']", NAMESPACES) ||
+            raise(Xmlenc::EncryptedDataNotFound.new("Encrypted data not found for: #{reference_uri}"))
       else
-        #document.at_xpath("//xenc:EncryptedData", NAMESPACES)
-        @node.at_xpath('ancestor::xenc:EncryptedData', Xmlenc::NAMESPACES)
+        @node.at_xpath('ancestor::xenc:EncryptedData', Xmlenc::NAMESPACES) ||
+            raise(Xmlenc::EncryptedDataNotFound.new('Encrypted data not in ancestore element'))
       end
     end
 
