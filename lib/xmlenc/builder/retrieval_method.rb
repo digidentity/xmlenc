@@ -5,6 +5,9 @@ module Xmlenc
 
       tag "RetrievalMethod"
 
+      register_namespace 'ds', Xmlenc::NAMESPACES[:ds]
+      namespace 'ds'
+
       attribute :type, String, :tag => "Type"
       attribute :uri, String, :tag => "URI"
 
