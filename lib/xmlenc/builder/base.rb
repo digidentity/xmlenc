@@ -1,4 +1,4 @@
-require "happymapper"
+require "xmlmapper"
 
 module Xmlenc
   module Builder
@@ -6,14 +6,14 @@ module Xmlenc
       extend ActiveSupport::Concern
 
       included do
-        include ::HappyMapper
+        include ::XmlMapper
         include ::ActiveModel::Validations
 
-        extend HappyMapperClassMethods
-        include HappyMapperInstanceMethods
+        extend XmlMapperClassMethods
+        include XmlMapperInstanceMethods
       end
 
-      module HappyMapperInstanceMethods
+      module XmlMapperInstanceMethods
         def initialize(attributes = {})
           attributes.each do |key, value|
             send("#{key}=", value) if respond_to?("#{key}=") && value.present?
@@ -29,7 +29,7 @@ module Xmlenc
         end
       end
 
-      module HappyMapperClassMethods
+      module XmlMapperClassMethods
         def parse(xml, options = {})
           raise Xmlenc::UnparseableMessage("Unable to parse nil document") if xml.nil?
 

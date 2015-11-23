@@ -25,10 +25,10 @@ Gem::Specification.new do |spec|
   else
     spec.add_dependency "activesupport", ">= 3.0.0"
     spec.add_dependency "activemodel", ">= 3.0.0"
+    spec.add_dependency "xmlmapper", '~> 0.6.0'
     spec.add_runtime_dependency('nokogiri', '~> 1.6.0')
   end
-    
-  spec.add_development_dependency "nokogiri-happymapper", '~> 0.5.7'
+
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rspec-rails", "~> 2.14"
   spec.add_development_dependency "rake"
