@@ -47,5 +47,21 @@ describe Xmlenc::EncryptedDocument do
         expect { subject.decrypt(private_key).chomp }.to raise_error(Xmlenc::EncryptedDataNotFound)
       end
     end
+
+    context 'when an EncryptedID also contains an EncryptedKey which cant be decrypted' do
+      let(:encrypted_xml) { File.read('spec/fixtures/encrypted_document_with_unknown_encrypted_key.xml') }
+
+      context 'when "fail_silent" is enabled' do
+        it 'decrypts the EncryptedID without raising an exception' do
+          expect(subject.decrypt(private_key, true).chomp).to eq plain_xml
+        end
+      end
+
+      context 'when "fail_silent" is disabled' do
+        it 'raises an exception' do
+          expect { subject.decrypt(private_key, false).chomp }.to raise_error(OpenSSL::PKey::RSAError)
+        end
+      end
+    end
   end
 end
