@@ -73,12 +73,20 @@ describe Xmlenc::Builder::EncryptedData do
   end
 
   describe "#initialize" do
-    it 'sets a default #id' do
-      expect(described_class.new().id).to be_a String
+    context 'no id specified' do
+      it 'sets a default #id' do
+        expect(described_class.new().id).to be_a String
+      end
+
+      it 'the default #id should start with a letter or an _' do
+        expect(described_class.new.id =~ /^[a-zA-Z_]/).not_to eq nil
+      end
     end
 
-    it 'sets #id to specified id' do
-      expect(described_class.new(id: 'TEST').id).to eq 'TEST'
+    context 'id specified' do
+      it 'sets #id to specified id' do
+        expect(described_class.new(id: 'TEST').id).to eq 'TEST'
+      end
     end
   end
 
