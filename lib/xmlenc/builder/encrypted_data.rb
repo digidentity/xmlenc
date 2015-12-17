@@ -28,7 +28,7 @@ module Xmlenc
         if options.key?(:id)
           self.id = options.delete(:id)
         else
-          self.id = SecureRandom.hex(5)
+          self.id = "_#{SecureRandom.hex(5)}"
         end
         super(*(args << options))
       end
