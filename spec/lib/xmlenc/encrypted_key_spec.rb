@@ -114,20 +114,26 @@ describe Xmlenc::EncryptedKey do
 
   describe 'encrypt' do
     let(:template_doc) { Nokogiri::XML::Document.parse(File.read('spec/fixtures/template.xml')) }
+    let(:template2_doc) { Nokogiri::XML::Document.parse(File.read('spec/fixtures/template2.xml')) }
     let(:encrypted_key_template) { described_class.new(template_doc.at_xpath('//xenc:EncryptedKey', Xmlenc::NAMESPACES)) }
+    let(:encrypted_key_template2) { described_class.new(template2_doc.at_xpath('//xenc:EncryptedKey', Xmlenc::NAMESPACES)) }
     let(:public_key) { private_key.public_key }
     let(:data) { 'random key' }
 
     it 'stores the encrypted value in the cipher value' do
       encrypted_key_template.encrypt(public_key, data)
+      encrypted_key_template2.encrypt(public_key, data)
 
       expect(encrypted_key_template.cipher_value.length).to be > 0
+      expect(encrypted_key_template2.cipher_value.length).to be > 0
     end
 
     it 'allows decryption with the key' do
       encrypted_key_template.encrypt(public_key, data)
+      encrypted_key_template2.encrypt(public_key, data)
 
       expect(encrypted_key_template.decrypt(private_key)).to be == data
+      expect(encrypted_key_template2.decrypt(private_key)).to be == data
     end
   end
 
