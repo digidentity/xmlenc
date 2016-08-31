@@ -20,7 +20,7 @@ describe Xmlenc::Builder::EncryptedKey do
   end
 
   describe "optional fields" do
-    [:id, :recipient, :encryption_method, :key_info].each do |field|
+    [:id, :recipient, :encryption_method, :key_info, :carried_key_name].each do |field|
       it "should have the #{field} field" do
         expect(subject).to respond_to field
       end
@@ -39,6 +39,10 @@ describe Xmlenc::Builder::EncryptedKey do
 
     it "should have a reference_list" do
       expect(subject.reference_list).to be_a Xmlenc::Builder::ReferenceList
+    end
+
+    it 'should have a carried key name' do
+      expect(subject.carried_key_name).to eq 'key-name'
     end
 
     it "should have a data object" do

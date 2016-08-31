@@ -48,6 +48,7 @@
         <ReferenceList>
           <DataReference URI="#ED"/>
         </ReferenceList>
+        <CarriedKeyName>key-name</CarriedKeyName>
       </EncryptedKey>
     </ds:KeyInfo>
     <CipherData>

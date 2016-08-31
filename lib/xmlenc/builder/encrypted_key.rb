@@ -14,6 +14,8 @@ module Xmlenc
       attribute :id, String, tag: 'Id'
       attribute :recipient, String, tag: 'Recipient'
 
+      element :carried_key_name, String, tag: 'CarriedKeyName', namespace: 'xenc'
+
       has_one :reference_list, Xmlenc::Builder::ReferenceList, :xpath => "./"
 
       attr_accessor :data
