@@ -59,7 +59,7 @@ describe Xmlenc::EncryptedKey do
 
     describe 'with rsa oaep' do
       before :each do
-        subject.stub(:cipher_value).and_return <<-CV.gsub(/[\n\s]/, '')
+        allow(subject).to receive(:cipher_value).and_return <<-CV.gsub(/[\n\s]/, '')
           ZF0JPSfv75/8M+O2O/xi+8N1b9KT94a4l1D1Q65hnX6F00t+wAWZSkcDUoD/
           y2/ERKGUyuQwsG6l58e4MwYpmDI4RhHrUYLCQBacAehqVZhwNxv99L7ANsqr
           ZJoT7N0kER9MbmuIZGb4qisLDfZtzIGKKUUiA3ARfQny4MUxFovSmVUF2Ojq
