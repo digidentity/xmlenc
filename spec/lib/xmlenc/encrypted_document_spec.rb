@@ -20,7 +20,7 @@ describe Xmlenc::EncryptedDocument do
       EOXML
       expect {
         described_class.new(badly_formed).document
-      }.to raise_error
+      }.to raise_error Nokogiri::XML::SyntaxError
     end
   end
 

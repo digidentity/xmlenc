@@ -9,7 +9,7 @@ describe Xmlenc::Algorithms::AESCBC do
 
   describe 'encrypt' do
     it 'encrypts the data' do
-      subject.stub(:iv).and_return(iv)
+      allow(subject).to receive(:iv).and_return(iv)
       expect(subject.encrypt(data)).to be == cipher_value
     end
   end
