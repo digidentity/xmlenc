@@ -57,6 +57,13 @@ module Xmlenc
         end
       end
 
+      def set_key_name(key_name)
+        if key_name
+          self.key_info ||= KeyInfo.new
+          self.key_info.key_name = key_name
+        end
+      end
+
       private
 
       def algorithm
