@@ -37,9 +37,16 @@ module Xmlenc
         encryptor = algorithm.setup
         encrypted = encryptor.encrypt(data, :node => encryption_method)
         cipher_data.cipher_value = Base64.encode64(encrypted)
+
         key_params = { :data => encryptor.key }
+
         encrypted_key = EncryptedKey.new(key_params.merge(key_options))
         encrypted_key.add_data_reference(id)
+
+        if key_options[:carried_key_name].present?
+          encrypted_key.carried_key_name = key_options[:carried_key_name]
+        end
+
         encrypted_key
       end
 

@@ -112,6 +112,14 @@ describe Xmlenc::Builder::EncryptedData do
         expect(Xmlenc::Builder::EncryptedKey).to receive(:new).with(hash_including(key_options))
         subject.encrypt('TEST', key_options)
       end
+
+      context 'when a "carried_key_name" is passed' do
+        let(:key_options) { { :id => '_SOME_ID', :recipient => 'SOME_RECIPIENT', :carried_key_name => 'CARRIED_KEY_NAME' } }
+
+        it 'sets the carried key name' do
+          expect(subject.encrypt('TEST', key_options).carried_key_name).to eq 'CARRIED_KEY_NAME'
+        end
+      end
     end
   end
 
