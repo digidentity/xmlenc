@@ -65,10 +65,4 @@ describe Xmlenc::EncryptedDocument do
     end
   end
 
-  describe 'parsing documents' do
-    let(:encrypted_xml) { File.read('spec/fixtures/artifact_response.xml') }
-    fit 'finds the correct data' do
-      puts subject.encrypted_keys.count
-    end
-  end
 end
