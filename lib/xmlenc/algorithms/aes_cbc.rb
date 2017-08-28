@@ -51,7 +51,7 @@ module Xmlenc
       end
 
       def cipher
-        @cipher ||= OpenSSL::Cipher::Cipher.new("aes-#{@size}-cbc")
+        @cipher ||= OpenSSL::Cipher.new("aes-#{@size}-cbc")
       end
     end
   end
