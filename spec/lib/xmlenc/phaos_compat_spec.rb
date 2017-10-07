@@ -14,7 +14,7 @@ describe 'Phaos compatibility tests' do
 
       key = private_key.private_decrypt(key_cipher, OpenSSL::PKey::RSA::PKCS1_OAEP_PADDING)
 
-      cipher = OpenSSL::Cipher::Cipher.new('des-ede3-cbc')
+      cipher = OpenSSL::Cipher.new('des-ede3-cbc')
       cipher.decrypt
       cipher.key = key
       cipher.iv  = data_cipher[0...cipher.iv_len]
@@ -35,7 +35,7 @@ describe 'Phaos compatibility tests' do
 
       key = private_key.private_decrypt(key_cipher, OpenSSL::PKey::RSA::PKCS1_OAEP_PADDING)
 
-      cipher = OpenSSL::Cipher::Cipher.new('aes-128-cbc')
+      cipher = OpenSSL::Cipher.new('aes-128-cbc')
       cipher.decrypt
       cipher.key = key
       cipher.iv  = data_cipher[0...cipher.iv_len]
@@ -56,7 +56,7 @@ describe 'Phaos compatibility tests' do
 
       key = private_key.private_decrypt(key_cipher)
 
-      cipher = OpenSSL::Cipher::Cipher.new('aes-128-cbc')
+      cipher = OpenSSL::Cipher.new('aes-128-cbc')
       cipher.decrypt
       cipher.key = key
       cipher.iv  = data_cipher[0...cipher.iv_len]
@@ -77,7 +77,7 @@ describe 'Phaos compatibility tests' do
 
       key = private_key.private_decrypt(key_cipher)
 
-      cipher = OpenSSL::Cipher::Cipher.new('aes-256-cbc')
+      cipher = OpenSSL::Cipher.new('aes-256-cbc')
       cipher.decrypt
       cipher.key = key
       cipher.iv  = data_cipher[0...cipher.iv_len]
@@ -98,7 +98,7 @@ describe 'Phaos compatibility tests' do
 
       key = private_key.private_decrypt(key_cipher, OpenSSL::PKey::RSA::PKCS1_OAEP_PADDING)
 
-      cipher = OpenSSL::Cipher::Cipher.new('aes-256-cbc')
+      cipher = OpenSSL::Cipher.new('aes-256-cbc')
       cipher.decrypt
       cipher.key = key
       cipher.iv  = data_cipher[0...cipher.iv_len]
