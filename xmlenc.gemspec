@@ -26,7 +26,7 @@ Gem::Specification.new do |spec|
     spec.add_dependency "activesupport", ">= 3.0.0"
     spec.add_dependency "activemodel", ">= 3.0.0"
     spec.add_dependency "xmlmapper", '>= 0.7.3'
-    spec.add_runtime_dependency('nokogiri', '~> 1.6.0')
+    spec.add_runtime_dependency('nokogiri', '>= 1.6.0', '< 2.0.0')
   end
 
   spec.add_development_dependency "bundler", "~> 1.3"

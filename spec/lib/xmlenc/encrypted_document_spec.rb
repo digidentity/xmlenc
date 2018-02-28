@@ -64,4 +64,5 @@ describe Xmlenc::EncryptedDocument do
       end
     end
   end
+
 end

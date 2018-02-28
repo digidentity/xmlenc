@@ -34,7 +34,7 @@ module Xmlenc
       end
 
       def cipher
-        @cipher ||= OpenSSL::Cipher::Cipher.new('des-ede3-cbc')
+        @cipher ||= OpenSSL::Cipher.new('des-ede3-cbc')
       end
     end
   end

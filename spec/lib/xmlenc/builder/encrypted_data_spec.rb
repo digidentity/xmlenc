@@ -112,23 +112,39 @@ describe Xmlenc::Builder::EncryptedData do
         expect(Xmlenc::Builder::EncryptedKey).to receive(:new).with(hash_including(key_options))
         subject.encrypt('TEST', key_options)
       end
+
+      context 'when a "carried_key_name" is passed' do
+        let(:key_options) { { :id => '_SOME_ID', :recipient => 'SOME_RECIPIENT', :carried_key_name => 'CARRIED_KEY_NAME' } }
+
+        it 'sets the carried key name' do
+          expect(subject.encrypt('TEST', key_options).carried_key_name).to eq 'CARRIED_KEY_NAME'
+        end
+      end
     end
   end
 
-  describe "#set_key_retrieval_method" do
-    it "sets the key info with the key name" do
+  describe '#set_key_retrieval_method' do
+    it 'sets the key info with the retrieval method' do
       subject.set_key_retrieval_method 'retrieval_method'
-      expect(subject.key_info.retrieval_method).to eq "retrieval_method"
+      expect(subject.key_info.retrieval_method).to eq 'retrieval_method'
     end
 
-    it "does not override old key info data" do
-      subject.set_key_retrieval_method("key retrieval_method")
-      expect(subject.key_info.encrypted_key).not_to be_nil
-    end
-
-    it "does not set the key info element if the key retrieval_method is nil" do
+    it 'does not set the key info element if the "retrieval_method" is nil' do
       subject.key_info = nil
       subject.set_key_retrieval_method(nil)
+      expect(subject.key_info).to be_nil
+    end
+  end
+
+  describe '#set_key_name' do
+    it 'sets the key info with the key name' do
+      subject.set_key_name 'key_name'
+      expect(subject.key_info.key_name).to eq 'key_name'
+    end
+
+    it 'does not set the key info element if the "key_name" is nil' do
+      subject.key_info = nil
+      subject.set_key_name(nil)
       expect(subject.key_info).to be_nil
     end
   end
