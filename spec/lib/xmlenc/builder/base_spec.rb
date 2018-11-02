@@ -21,7 +21,7 @@ describe BaseDummy do
     it "raises an error if the message is nil" do
       expect {
         BaseDummy.parse(nil)
-      }.to raise_error(Xmlenc::UnparseableMessage)
+      }.to raise_error(Xmlenc::UnparseableMessage, 'Unable to parse nil document')
     end
   end
 end

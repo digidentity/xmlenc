@@ -31,7 +31,7 @@ module Xmlenc
 
       module XmlMapperClassMethods
         def parse(xml, options = {})
-          raise Xmlenc::UnparseableMessage("Unable to parse nil document") if xml.nil?
+          raise Xmlenc::UnparseableMessage.new("Unable to parse nil document") if xml.nil?
 
           object = super
           if object.is_a?(Array)
