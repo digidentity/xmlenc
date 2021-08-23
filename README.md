@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/digidentity/xmlenc.svg)](https://travis-ci.org/digidentity/xmlenc)
+[![Build Status](https://app.travis-ci.com/digidentity/xmlenc.svg?branch=master)](https://app.travis-ci.com/digidentity/xmlenc)
 [![Coverage Status](https://coveralls.io/repos/digidentity/xmlenc/badge.svg?branch=master&service=github)](https://coveralls.io/github/digidentity/xmlenc?branch=master)
 [![Code Climate](https://codeclimate.com/github/digidentity/xmlenc/badges/gpa.svg)](https://codeclimate.com/github/digidentity/xmlenc)
 
