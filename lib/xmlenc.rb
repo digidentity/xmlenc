@@ -38,6 +38,7 @@ module Xmlenc
     autoload :RsaOaepMgf1p, 'xmlenc/algorithms/rsa_oaep_mgf1p'
     autoload :DES3CBC, 'xmlenc/algorithms/des3_cbc'
     autoload :AESCBC, 'xmlenc/algorithms/aes_cbc'
+    autoload :AESGCM, 'xmlenc/algorithms/aes_gcm'
   end
 
   autoload :EncryptedDocument, 'xmlenc/encrypted_document'
