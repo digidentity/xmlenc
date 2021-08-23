@@ -1,11 +1,10 @@
 language: ruby
 rvm:
-  - 1.9.3
-  - 2.0
-  - 2.1
-  - 2.2
-  - jruby-19mode
-matrix:
-  allow_failures:
-    - rvm: jruby-19mode
+  - 2.0.0
+  - 2.1.10
+  - 2.2.10
+  - 2.5.9
+  - 2.6.8
+  - 2.7.4
+  - 3.0.2
 sudo: false
